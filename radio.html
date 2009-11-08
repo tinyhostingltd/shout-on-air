@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title></title>
+		<link rel="shortcut icon" href="/favicon.ico" >
+		<link rel="stylesheet" href="stylesheets/radio.css" type="text/css" media="all">
+		<link rel="stylesheet" href="stylesheets/jquery.twitter.css" type="text/css" media="all">
+		<link type="text/css" href="stylesheets/themes/base/ui.all.css" rel="stylesheet" />
+		<style type="text/css">
+			#slider { margin: 10px; }
+		</style>
+		
+		<script type="text/javascript" src="lib/air/AIRAliases.js"></script>
+        <script type="application/x-shockwave-flash" src="lib/air/servicemonitor.swf"></script>
+		
+		<script type="text/javascript" src="lib/sys-tray.js"></script>
+		<script type="text/javascript" src="lib/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="lib/class-0.0.2.min.js"></script>
+		<script type="text/javascript" src="lib/jquery.timers-1.1.2.js"></script>
+		<script type="text/javascript" src="lib/json2.js"></script>
+		<script type="text/javascript" src="lib/blogger.js"></script>
+		<script type="text/javascript" src="lib/jquery.twitter.js"></script>
+		<script type="text/javascript" src="lib/ui.core.js"></script>
+		<script type="text/javascript" src="lib/ui.slider.js"></script>
+		
+		<script type="text/javascript" src="scripts/prefs.js"></script>
+		<script type="text/javascript">
+			prefs.init();
+			function openInBrowser(url) {
+				air.navigateToURL( new air.URLRequest(url)); 
+			}
+
+			$(document).ready(function() {
+				document.title = prefs.stationname;
+				$("#header").html(prefs.header);
+				SetUpSysTray();
+			});
+		</script>
+		
+		<script type="text/javascript" src="scripts/radio.player.js"></script>
+		<script type="text/javascript" src="scripts/radio.cb.js"></script>
+		
+	</head>
+
+	<body>
+		<div id="header">
+			
+		</div>
+		
+		<div id="twitter"></div>
+		
+
+		
+		<div id="footer">
+			<div id="player">
+				<div style="float: left; padding-bottom: 10px;">
+					<a id="play" href="#" style="display: none;"><img src="images/player-start.png" border="0"></a>
+					<a id="stop" href="#"><img src="images/player-stop.png" border="0"></a>
+				</div>
+				<div id="slider" style="margin: 16px 5px 0 60px;"></div>
+			</div>
+		</div>
+	</body>
+</html>
