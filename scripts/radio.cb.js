@@ -4,13 +4,13 @@
 $(document).ready(function() {
 				
 	var player1 = new radio();
-	//var player2 = new radio();
+	var player2 = new radio();
 	player1.load();
 	player1.play();//default play
 	air.SoundMixer.soundTransform = new air.SoundTransform(prefs.startingvol, 0); //Set global sound level to 80%
 	
-	// This toggles the players to clean the memory perodicaly (3 hours)
-	$(document).everyTime((10800 * 1000), function(i){
+	// This toggles the players to clean the memory perodicaly (1 hours)
+	$(document).everyTime((3600 * 1000), function(i){
 		if (player1.playing) {
 			//air.trace("loading player 2");
 			player2.load();
@@ -55,8 +55,8 @@ $(document).ready(function() {
 		if (player1.playing)
 			player1.stop();
 		
-		//if (player2.playing)
-		//	player2.stop();
+		if (player2.playing)
+			player2.stop();
     });
 });
 
