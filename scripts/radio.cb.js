@@ -45,6 +45,7 @@ $(document).ready(function() {
 	$("#play").click(function () { 
 		$("#play").hide();
 		$("#stop").show();
+		player1.load();
 		player1.play();
     });
 	
