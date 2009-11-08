@@ -1,10 +1,28 @@
 /**
  * @author Courtenay Probert
  */
+var player1 = new radio();
+var player2 = new radio();
+
+function stopPlayer(){
+	$("#stop").hide();
+	$("#play").show();
+	
+	if (player1.playing)
+		player1.stop();
+	
+	if (player2.playing)
+		player2.stop();
+}
+function startPlayer(){
+	stopPlayer();
+	$("#play").hide();
+	$("#stop").show();
+	player1.load();
+	player1.play();
+}
+
 $(document).ready(function() {
-				
-	var player1 = new radio();
-	var player2 = new radio();
 	player1.load();
 	player1.play();//default play
 	air.SoundMixer.soundTransform = new air.SoundTransform(prefs.startingvol, 0); //Set global sound level to 80%
@@ -43,24 +61,13 @@ $(document).ready(function() {
 	});
 	
 	$("#play").click(function () { 
-		$("#play").hide();
-		$("#stop").show();
-		player1.load();
-		player1.play();
+		startPlayer();
     });
 	
 	$("#stop").click(function () { 
-		$("#stop").hide();
-		$("#play").show();
-		
-		if (player1.playing)
-			player1.stop();
-		
-		if (player2.playing)
-			player2.stop();
+		stopPlayer();
     });
 });
-
 
 function getTweets(){
 	$("#twitter").getTwitter({
