@@ -25,7 +25,7 @@ function startPlayer(){
 
 $(document).ready(function() {
 	player1.load();
-	// Should add intro jingle here
+	//playSound("/sound/jingle.mp3"); // Should add intro jingle here
 	player1.play();//default play
 	air.SoundMixer.soundTransform = new air.SoundTransform(prefs.startingvol(), 0); //Set global sound level to 80%
 	

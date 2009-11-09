@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<prefs>
+	<stationname>DapperFM</stationname>
+	<weburl>http://www.dapperfm.co.uk</weburl>
+	<streamurl>http://93.89.82.244</streamurl>
+	<streamport>8096</streamport>
+	<twitterusername>dapperfm</twitterusername>
+	<header>
+		<![CDATA[ 
+		<h1>Dapper <em style='color:#5E7E19;'>FM</em></h1><h2>&nbsp; &nbsp; &nbsp; our community <br />  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; your radio station</h2>
+		]]>
+	</header>
+</prefs>

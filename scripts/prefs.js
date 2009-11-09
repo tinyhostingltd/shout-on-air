@@ -6,19 +6,15 @@ var prefs = {
 	weburl: "",
 	streamurl: "",
 	streamport: 80,
-	buffersize: 1024,
 	twitterusername: "",
 	header: "",
+	
+	buffersize: 1024,
 	debug: false,
 	init: function(){
 		this.debug = true;
-		this.stationname = "DapperFM";
-		this.weburl = "http://www.dapperfm.co.uk";
-		this.streamurl = "http://93.89.82.244";
-		this.streamport = 8096;
 		this.buffersize = 800;
-		this.twitterusername = "dapperfm";
-		this.header = "<h1>Dapper <em style='color:#5E7E19;'>FM</em></h1><h2>&nbsp; &nbsp; &nbsp; our community <br /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; your radio station</h2>";
+		this.loadprefs();
 	},
 	startingvol: function(volume){
 		if(volume){ //Set
@@ -33,6 +29,32 @@ var prefs = {
 				return volume.readUTFBytes(volume.bytesAvailable);
 			else 
 				return 0.8;
+		}
+	},
+	loadprefs: function(){
+		var prefsFile = air.File.applicationDirectory;
+		prefsfile = prefsFile.resolvePath("config.xml");
+		
+		var prefsXML;
+		var stream;
+		stream = new air.FileStream();
+		if (prefsfile.exists) {
+			stream.open(prefsfile, air.FileMode.READ);
+			prefsXML = stream.readUTFBytes(stream.bytesAvailable);
+			stream.close();
+			//air.trace("prefsXML: "+ prefsXML);	
+			var domParser = new DOMParser();
+			prefsXML = domParser.parseFromString(prefsXML, "text/xml");
+			
+			this.stationname = prefsXML.getElementsByTagName("stationname")[0].firstChild.nodeValue; $(this).log("stationname: "+ this.stationname);
+			this.weburl = prefsXML.getElementsByTagName("weburl")[0].firstChild.nodeValue; $(this).log("weburl: "+ this.weburl);
+			this.streamurl = prefsXML.getElementsByTagName("streamurl")[0].firstChild.nodeValue; $(this).log("streamurl: "+ this.streamurl);
+			this.streamport = prefsXML.getElementsByTagName("streamport")[0].firstChild.nodeValue; $(this).log("streamport: "+ this.streamport);
+			this.twitterusername = prefsXML.getElementsByTagName("twitterusername")[0].firstChild.nodeValue; $(this).log("twitterusername: "+ this.twitterusername);
+			this.header = prefsXML.getElementsByTagName("header")[0].textContent; //$(this).log("header: "+ this.header);
+		}
+		else{
+			alert("Can not find config file! "+ prefsfile);
 		}
 	}
 }
