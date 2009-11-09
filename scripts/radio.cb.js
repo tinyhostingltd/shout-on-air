@@ -89,9 +89,6 @@ function getTweets(){
 		showProfileLink: true,
 		showTimestamp: true
 	});	
-	//$('a:external').addClass('external');
-	
-
 }
 
 $(document).ready(function() {

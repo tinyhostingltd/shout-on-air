@@ -27,12 +27,12 @@
 		
 		<script type="text/javascript" src="scripts/prefs.js"></script>
 		<script type="text/javascript">
-			prefs.init();
-			$(document).ready(function() {
-				
-				document.title = prefs.stationname;
-				$("#header").html(prefs.header);
-				SetUpSysTray();
+			prefs.init(function(){
+				$(document).ready(function() {
+					document.title = prefs.stationname;
+					$("#header").html(prefs.header);
+					SetUpSysTray();
+				});
 			});
 		</script>
 		

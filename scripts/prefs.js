@@ -11,10 +11,14 @@ var prefs = {
 	
 	buffersize: 1024,
 	debug: false,
-	init: function(){
+	error: false,
+	init: function(callback){
 		this.debug = true;
 		this.buffersize = 800;
 		this.loadprefs();
+		
+		if (!this.error && typeof callback == 'function') 
+				callback.call(this);
 	},
 	startingvol: function(volume){
 		if(volume){ //Set
@@ -39,21 +43,32 @@ var prefs = {
 		var stream;
 		stream = new air.FileStream();
 		if (prefsfile.exists) {
-			stream.open(prefsfile, air.FileMode.READ);
-			prefsXML = stream.readUTFBytes(stream.bytesAvailable);
-			stream.close();
-			//air.trace("prefsXML: "+ prefsXML);	
-			var domParser = new DOMParser();
-			prefsXML = domParser.parseFromString(prefsXML, "text/xml");
-			
-			this.stationname = prefsXML.getElementsByTagName("stationname")[0].firstChild.nodeValue; $(this).log("stationname: "+ this.stationname);
-			this.weburl = prefsXML.getElementsByTagName("weburl")[0].firstChild.nodeValue; $(this).log("weburl: "+ this.weburl);
-			this.streamurl = prefsXML.getElementsByTagName("streamurl")[0].firstChild.nodeValue; $(this).log("streamurl: "+ this.streamurl);
-			this.streamport = prefsXML.getElementsByTagName("streamport")[0].firstChild.nodeValue; $(this).log("streamport: "+ this.streamport);
-			this.twitterusername = prefsXML.getElementsByTagName("twitterusername")[0].firstChild.nodeValue; $(this).log("twitterusername: "+ this.twitterusername);
-			this.header = prefsXML.getElementsByTagName("header")[0].textContent; //$(this).log("header: "+ this.header);
+			try {
+				stream.open(prefsfile, air.FileMode.READ);
+				prefsXML = stream.readUTFBytes(stream.bytesAvailable);
+				stream.close();
+				//air.trace("prefsXML: "+ prefsXML);	
+				var domParser = new DOMParser();
+				prefsXML = domParser.parseFromString(prefsXML, "text/xml");
+				
+				this.stationname = prefsXML.getElementsByTagName("stationname")[0].firstChild.nodeValue;
+				$(this).log("stationname: " + this.stationname);
+				this.weburl = prefsXML.getElementsByTagName("weburl")[0].firstChild.nodeValue;
+				$(this).log("weburl: " + this.weburl);
+				this.streamurl = prefsXML.getElementsByTagName("streamurl")[0].firstChild.nodeValue;
+				$(this).log("streamurl: " + this.streamurl);
+				this.streamport = prefsXML.getElementsByTagName("streamport")[0].firstChild.nodeValue;
+				$(this).log("streamport: " + this.streamport);
+				this.twitterusername = prefsXML.getElementsByTagName("twitterusername")[0].firstChild.nodeValue;
+				$(this).log("twitterusername: " + this.twitterusername);
+				this.header = prefsXML.getElementsByTagName("header")[0].textContent; //$(this).log("header: "+ this.header);
+			}
+			catch(err){
+				this.error = true;
+			}
 		}
 		else{
+			this.error = true;
 			alert("Can not find config file! "+ prefsfile);
 		}
 	}
