@@ -32,34 +32,43 @@ var radio = Class.create({
 		//this.req = null;
 		this.s = null;
 	},
-	play: function(otherplayer){
+	play: function(callback){
 		//air.trace();
 		if (bufferloaded) {
-			//air.trace("Buffer is loaded - Now playing");
+			$(this).log("Buffer is loaded - Now playing");
 			this.playing = true;
 			this.channel = this.s.play(); //this.pausePosition
+			
+			if(typeof callback == 'function'){
+		        callback.call(this); // Stop other player
+		    }
 		}
 		else{
-			//air.trace("Buffer not loaded - trying again in "+ this.buffertime +" seconds");
+			$(this).log("Buffer not loaded - trying again in "+ this.buffertime +" seconds");
 			$(this).oneTime(this.buffertime *1000, function() {
 				this.buffertime += 1;
-				this.play();
+				this.play(callback);
 			});
 		}
 	},
 	stop: function(){
 		this.playing = false;
-		this.pausePosition = this.channel.position; //not using at the mo
-		this.channel.stop();
+		try {
+			this.pausePosition = this.channel.position; //not using at the mo
+			this.channel.stop();
+		} 
+		catch (err) {
+			air.trace("Error on stop: "+ err);
+		}
 	  	this.unload(); // this should clean the memory
 	},
 	progress: function(event){
 		var loadedPct = Math.round(100 * (event.bytesLoaded / prefs.buffersize)); 
     	//air.trace("The sound is " + loadedPct + "% loaded.");
-		if (loadedPct >= 100) {
+		if (loadedPct >= 100)
 			bufferloaded = true;
-			//air.trace("Buffer is loaded");
-		}
+		else
+			$(this).log("Buffer: "+ loadedPct +"%");
 	},
 	error: function(event){
 		alert("The station could not be loaded: " + event.text); 

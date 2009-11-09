@@ -18,6 +18,7 @@
 		<script type="text/javascript" src="lib/jquery-1.3.2.min.js"></script>
 		<script type="text/javascript" src="lib/class-0.0.2.min.js"></script>
 		<script type="text/javascript" src="lib/jquery.timers-1.1.2.js"></script>
+		<script type="text/javascript" src="lib/utils.js"></script>
 		<script type="text/javascript" src="lib/json2.js"></script>
 		<script type="text/javascript" src="lib/blogger.js"></script>
 		<script type="text/javascript" src="lib/jquery.twitter.js"></script>
@@ -27,11 +28,8 @@
 		<script type="text/javascript" src="scripts/prefs.js"></script>
 		<script type="text/javascript">
 			prefs.init();
-			function openInBrowser(url) {
-				air.navigateToURL( new air.URLRequest(url)); 
-			}
-
 			$(document).ready(function() {
+				
 				document.title = prefs.stationname;
 				$("#header").html(prefs.header);
 				SetUpSysTray();

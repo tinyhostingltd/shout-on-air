@@ -107,6 +107,14 @@
 		
 						// add unique class to last list item
 						tl.find("li:last").addClass("lastTweet");
+						
+						$("a:external").each(function(i){
+							//$(this).log("Adding click to link: "+ $(this).attr('href'));
+							$(this).click(function(e){
+								openInBrowser($(this).attr('href'));
+								e.preventDefault();
+							});
+						}).log("Wireing links");
 			} ); 
 			loader.load(request); 
 		});
