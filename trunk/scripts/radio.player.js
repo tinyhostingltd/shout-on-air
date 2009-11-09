@@ -64,7 +64,7 @@ var radio = Class.create({
 	},
 	progress: function(event){
 		var loadedPct = Math.round(100 * (event.bytesLoaded / prefs.buffersize)); 
-    	//air.trace("The sound is " + loadedPct + "% loaded.");
+    	//air.trace("Buffer: " + event.bytesLoaded);
 		if (loadedPct >= 100)
 			bufferloaded = true;
 		else
