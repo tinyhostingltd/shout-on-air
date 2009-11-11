@@ -1,6 +1,7 @@
 /**
  * @author Courtenay Probert
  */
+//Global vars used in the call back events (because this is nonger the radion object)
 var bufferloaded = false;
 buffersize = 500;
 

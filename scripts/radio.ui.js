@@ -6,7 +6,6 @@ var ui = {
 		document.title = prefs.stationname;
 		$("#header").html(prefs.header);
 		
-		
 		$("#playControl").click(function () { 
 			ui.stopPlayer();
 	    });	
@@ -20,6 +19,8 @@ var ui = {
 		});
 	},
 	stopPlayer: function(){
+		$(this).log("Stoping player...");
+		$("#playControl").unbind();
 		shoutcastradio.stop(function(){
 			$("#playControl").click(function () { 
 				ui.startPlayer();
@@ -29,8 +30,14 @@ var ui = {
 	},
 	startPlayer: function(){
 		//this.stopPlayer();
+		$(this).log("Starting player...");
+		$("#playControl").unbind();
 		$("#playControl img").attr("src", "/images/visualization.png");
+		$("#playControl").click(function() { 
+					alert("Buffering...");
+		});	
 		shoutcastradio.restart(function(){
+			$("#playControl").unbind();
 			$("#playControl").click(function () { 
 					ui.stopPlayer();
 			});	
