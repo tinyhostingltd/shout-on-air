@@ -5,9 +5,9 @@ var prefs = {
 	stationname: "",
 	weburl: "",
 	streamurl: "",
-	streamport: 80,
+	streamport: 0,
 	twitterusername: "",
-	header: "",
+	header: "<h1>Shout-On-Air</h1>",
 	
 	buffersize: 1024,
 	debug: false,
