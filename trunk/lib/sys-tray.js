@@ -34,12 +34,12 @@ function iconLoadComplete(event){
 				// Player specific
 				var playCommand = new air.NativeMenuItem("Play");
 				playCommand.addEventListener(air.Event.SELECT,function(event){
-					startPlayer();
+					ui.startPlayer();
 				});
 				
 				var stopCommand = new air.NativeMenuItem("Stop");
 				stopCommand.addEventListener(air.Event.SELECT,function(event){
-					stopPlayer();
+					ui.stopPlayer();
 				});
 				// End player specific
 				
