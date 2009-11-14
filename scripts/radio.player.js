@@ -17,7 +17,7 @@ var radio = {
 	channel: null,
 	pausePosition: 0,
 	buffertime: 2,
-	debug: true,
+	debug: false,
 	init: function(uri){
 		this.uri = uri;
         this.log("You instantiated: "+ this.name);
