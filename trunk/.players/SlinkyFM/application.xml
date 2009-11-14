@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <application xmlns="http://ns.adobe.com/air/application/1.5">
 	<!-- The application identifier string, unique to this application. Required. -->
-	<id>uk.co.dapperfm</id>
+	<id>fm.slinky</id>
 	<!-- Used as the filename for the application. Required. -->
-	<filename>DapperFM</filename>
+	<filename>SlinkyFM</filename>
 	<!-- The name that is displayed in the AIR application installer. Optional. -->
-	<name>DapperFM</name>
+	<name>SlinkyFM</name>
 	<!-- An application version designator (such as "v1", "2.5", or "Alpha 1"). Required. -->
 	<version>1.6</version>
 	<!-- Description, displayed in the AIR application installer. Optional. -->

@@ -36,25 +36,19 @@
 					ui.init();
 					buffersize = prefs.buffersize;
 					shoutcastradio.debug = true;
+					shoutcastradio.toggletime = 20;
 					shoutcastradio.init(prefs.streamurl, prefs.streamport);
 					netmon.init();
-					netmon.onNetworkChange(true); //Check net and play if available //ui.startPlayer();
+					netmon.onNetworkChange(true); //Check net and play if available;
 				});
 			});
 		</script>
-		
-		
-		
 	</head>
 
 	<body>
-		<div id="header">
-			
-		</div>
+		<div id="header"></div>
 		
 		<div id="twitter"></div>
-		
-
 		
 		<div id="footer">
 			<div id="player">
