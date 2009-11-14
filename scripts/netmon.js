@@ -14,6 +14,7 @@ var netmon = {
 		} 
 		catch (err) {
 			$(this).log("Error communicating with " + this.monitorURL);
+			ui.stopPlayer();
 		}
 	},
 	alertNetworkChange: function(e){

@@ -6,20 +6,16 @@ var ui = {
 		document.title = prefs.stationname;
 		$("#header").html(prefs.header);
 		
-		$("#playControl").click(function () { 
-			ui.stopPlayer();
-	    });	
-		
 		this.setupslider();
 		
 		this.getTweets();
-		var ms2s = 120 * 1000 //convert miliseconds to seconds
-		$(document).everyTime(ms2s, function(i){
-			this.getTweets();
-		});
+		//var ms2s = 120 * 1000 //convert miliseconds to seconds
+		//$(document).everyTime(ms2s, function(i){
+			ui.getTweets();
+		//});
 	},
 	stopPlayer: function(){
-		$(this).log("Stoping player...");
+		$(this).log("stopPlayer clicked");
 		$("#playControl").unbind();
 		shoutcastradio.stop(function(){
 			$("#playControl").click(function () { 
@@ -29,8 +25,7 @@ var ui = {
 		});
 	},
 	startPlayer: function(){
-		//this.stopPlayer();
-		$(this).log("Starting player...");
+		$(this).log("startPlayer clicked");
 		$("#playControl").unbind();
 		$("#playControl img").attr("src", "/images/visualization.png");
 		$("#playControl").click(function() { 
@@ -70,5 +65,6 @@ var ui = {
 			showProfileLink: true,
 			showTimestamp: true
 		});	
+		setTimeout(ui.getTweets, 120*1000);
 	}
 }
