@@ -11,7 +11,7 @@ function SetUpSysTray(){
 		
 		var iconLoader = new runtime.flash.display.Loader();
 		iconLoader.contentLoaderInfo.addEventListener(air.Event.COMPLETE, iconLoadComplete);
-		iconLoader.load(new air.URLRequest("icons/DFMLogo-16.png"));
+		iconLoader.load(new air.URLRequest("icons/Logo-16.png"));
 		
 		air.NativeApplication.nativeApplication.icon.addEventListener("click", function(event){
 			Dock();
