@@ -7,38 +7,35 @@ var ui = {
 		$("#header").html(prefs.header);
 		
 		this.setupslider();
-		
 		this.getTweets();
-		//var ms2s = 120 * 1000 //convert miliseconds to seconds
-		//$(document).everyTime(ms2s, function(i){
-			ui.getTweets();
-		//});
-	},
-	stopPlayer: function(){
-		$(this).log("stopPlayer clicked");
-		$("#playControl").unbind();
-		shoutcastradio.stop(function(){
-			$("#playControl").click(function () { 
-				ui.startPlayer();
-		    });	
-			$("#playControl img").attr("src", "/images/player-start.png");		
-		});
+		this.getTweets();
 	},
 	startPlayer: function(){
 		$(this).log("startPlayer clicked");
-		$("#playControl").unbind();
-		$("#playControl img").attr("src", "/images/visualization.png");
-		$("#playControl").click(function() { 
-					alert("Buffering...");
-		});	
+		this.wire.buffering();
 		shoutcastradio.restart(function(){
-			$("#playControl").unbind();
-			$("#playControl").click(function () { 
-					ui.stopPlayer();
-			});	
-			$("#playControl img").attr("src", "/images/player-stop.png");	
+			ui.wire.stop();	
 		});
-		
+	},
+	stopPlayer: function(){
+		$(this).log("stopPlayer clicked");
+		shoutcastradio.stop(function(){
+			ui.wire.start();		
+		});
+	},
+	startRecord: function(){
+		$(this).log("startRecord clicked");	
+		radio.init(prefs.streamurl + ":" + prefs.streamport);
+		radio.load();
+		radio.record();
+		$("#playControl").click(function () { 
+				ui.stopRecord();
+		});	
+		$("#playControl img").attr("src", "/images/record.png");
+	},
+	stopRecord: function(){
+		radio.stoprecord();
+		this.stopPlayer()
 	},
 	setupslider: function(){
 		$("#slider").slider({
@@ -66,5 +63,31 @@ var ui = {
 			showTimestamp: true
 		});	
 		setTimeout(ui.getTweets, 120*1000);
+	},
+	wire: {
+		start: function(){
+			$("#playControl").unbind();
+			$("#playControl").click(function () { 
+				ui.startPlayer();
+		    });
+			$("#playControl img").attr("src", "/images/player-start.png");
+		},
+		stop: function(){
+			$("#playControl").unbind();
+			$("#playControl").click(function () { 
+					ui.stopPlayer();
+			});	
+			$("#playControl img").attr("src", "/images/player-stop.png");
+		},
+		buffering: function(){
+			$("#playControl").dblclick(function () { 
+				ui.startRecord();
+			});
+			$("#playControl").unbind();
+			$("#playControl").click(function() { 
+					alert("Buffering...");
+			});	
+			$("#playControl img").attr("src", "/images/visualization.png");
+		}
 	}
 }
