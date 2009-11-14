@@ -1,13 +1,6 @@
 /**
  * @author Courtenay Probert
  */
-//Global vars used in the call back events
-var bufferloaded = false;
-var buffersize = 500;
-var buffertime = 2;
-function loaderror(msg){
-	alert("The station could not be loaded: " + msg);
-}
 var radio = {
 	playing: false,
 	s: null,
@@ -18,12 +11,17 @@ var radio = {
 	pausePosition: 0,
 	buffertime: 2,
 	debug: false,
+	bufferloaded: false,
+	buffersize: 500,
+	buffertime: 2,
+	urlStream: null,
+	fileStream: null,
 	init: function(uri){
 		this.uri = uri;
         this.log("You instantiated: "+ this.name);
     },
 	load: function(){
-		bufferloaded = false;
+		this.bufferloaded = false;
 		var rnduri = this.uri + "/;" + Math.round(Math.random() * 100000) + ".mp3"
 		this.req = new air.URLRequest(rnduri); 
 		this.req.cacheResponse = false;	
@@ -31,8 +29,8 @@ var radio = {
 		this.log("Loading: "+ rnduri);
 		
 		this.s = new air.Sound();
-		this.s.addEventListener(air.IOErrorEvent.IO_ERROR, this.e.error); 
-		this.s.addEventListener(air.ProgressEvent.PROGRESS, this.e.progress); 
+		this.s.addEventListener(air.IOErrorEvent.IO_ERROR, this.e.error.bind(this)); 
+		this.s.addEventListener(air.ProgressEvent.PROGRESS, this.e.progress.bind(this)); 
 		this.context = new air.SoundLoaderContext(buffersize, true); 
 		this.s.load(this.req, this.context); 
 		this.log("Loaded player: "+ this.name);
@@ -52,7 +50,7 @@ var radio = {
 		}
 	},
 	play: function(callback){
-		if (bufferloaded) {
+		if (this.bufferloaded) {
 			this.log("Buffer is loaded - Now playing");
 			this.playing = true;
 			this.channel = this.s.play(); //this.pausePosition
@@ -90,20 +88,41 @@ var radio = {
 			this.unload(); // this should clean the memory
 		}
 	},
-	e: { // 'this' = 'window' on these event callbacks
+	record: function(){
+		this.log(this.name + " recording");
+		this.urlStream = new air.URLStream();
+		this.fileStream = new air.FileStream();
+		this.urlStream.addEventListener(air.ProgressEvent.PROGRESS, this.e.writefile.bind(this));
+		this.urlStream.addEventListener(air.IOErrorEvent.IO_ERROR, this.e.error.bind(this));
+		this.file = air.File.desktopDirectory.resolvePath("DapperFM.mp3");
+		this.fileStream.openAsync(this.file, air.FileMode.WRITE);
+		this.urlStream.load(this.req);
+		this.play();
+	},
+	stoprecord: function(){
+		if(this.urlStream.connected)
+			this.urlStream.close();
+		this.fileStream.close();
+		this.stop();
+	},
+	e: {
 		progress: function(event){
 			// Could i flush when event.bytesLoaded  = x ??? (stop and close)
-			var loadedPct = Math.round(100 * (event.bytesLoaded / buffersize));
-			//air.trace("Buffer: " + event.bytesLoaded + " - buffersize:" + buffersize);
+			var loadedPct = Math.round(100 * (event.bytesLoaded / this.buffersize));
 			if (loadedPct >= 100) 
-				bufferloaded = true;
+				this.bufferloaded = true;
 			else 
-				$(this).log("Buffer: " + loadedPct + "%");
+				$(this).log(this.name +" buffer: " + loadedPct + "%");
 		},
 		error: function(event){
-			loaderror(event.text);
-			//this.stop(); // I believe 'this' = window here because the calling object is 'window.runtime.flash.events.IOErrorEvent'
-		}
+			this.log(event.text);
+			this.stop();
+		},
+		writefile: function(){
+			var dataBuffer = new air.ByteArray();
+			this.urlStream.readBytes(dataBuffer, 0, this.urlStream.bytesAvailable);
+			this.fileStream.writeBytes(dataBuffer, 0, dataBuffer.length);
+	},
 	},
 	log: function(msg){
 		if(this.debug)

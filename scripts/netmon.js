@@ -8,12 +8,12 @@ var netmon = {
 	onNetworkChange: function(e){
 		$(this).log("Network Change");
 		try { //Check resource availability 
-			netmon.networkMonitor = new air.URLMonitor(new air.URLRequest(this.monitorURL));
+			netmon.networkMonitor = new air.URLMonitor(new air.URLRequest(netmon.monitorURL));
 			netmon.networkMonitor.addEventListener(air.StatusEvent.STATUS, netmon.alertNetworkChange);
 			netmon.networkMonitor.start();
 		} 
 		catch (err) {
-			$(this).log("Error communicating with " + this.monitorURL);
+			$(this).log("Error communicating with " + netmon.monitorURL);
 			ui.stopPlayer();
 		}
 	},
@@ -23,7 +23,7 @@ var netmon = {
 			ui.startPlayer();
 		else {
 			ui.stopPlayer();
-			$(this).log("Can not find: " + monitorURL);
+			$(this).log("Can not find: " + netmon.monitorURL);
 			$("#playControl img").attr("src", "/images/disconnect.png");
 		}
 	}
