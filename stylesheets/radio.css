@@ -24,7 +24,7 @@ body {
 div#header {
 	margin-bottom: 1em;
 	padding-left: 4.3em;
-	background: transparent url("/icons/DFMLogo-48.png") 0 0.2em no-repeat;
+	background: transparent url("/icons/Logo-48.png") 0 0.2em no-repeat;
 	border-bottom: 2px solid #ddd;
 }
 
@@ -41,7 +41,7 @@ h1, h2 {
 h1 {
 	margin: 0 0 0.3em 0;
 	font-size: 2em;
-	color: #025682;
+	color: #333;
 }
 
 h2 {
