@@ -47,3 +47,13 @@ Function.prototype.bind = function(){
       return __method.apply(object, args.concat(_$A(arguments)));
     }
 }
+
+$.ctrl = function(key, callback, args) {
+    $(document).keydown(function(e) {
+        if(!args) args=[]; // IE barks when args is null
+        if(e.keyCode == key.charCodeAt(0) && e.ctrlKey) {
+            callback.apply(this, args);
+            return false;
+        }
+    });
+};
