@@ -9,6 +9,10 @@ var ui = {
 		this.setupslider();
 		this.getTweets();
 		this.getTweets();
+		
+		$.ctrl('R', function() {
+		    ui.startRecord();
+		});
 	},
 	startPlayer: function(){
 		$(this).log("startPlayer clicked");
@@ -25,13 +29,16 @@ var ui = {
 	},
 	startRecord: function(){
 		$(this).log("startRecord clicked");	
-		radio.init(prefs.streamurl + ":" + prefs.streamport);
-		radio.load();
-		radio.record();
-		$("#playControl").click(function () { 
-				ui.stopRecord();
-		});	
-		$("#playControl img").attr("src", "/images/record.png");
+		$("#playControl").unbind();
+		shoutcastradio.stop(function(){
+			radio.init(prefs.streamurl + ":" + prefs.streamport);
+			radio.load();
+			radio.record();
+			$("#playControl").click(function () { 
+					ui.stopRecord();
+			});	
+			$("#playControl img").attr("src", "/images/record.png");
+		});
 	},
 	stopRecord: function(){
 		radio.stoprecord();
@@ -80,9 +87,6 @@ var ui = {
 			$("#playControl img").attr("src", "/images/player-stop.png");
 		},
 		buffering: function(){
-			$("#playControl").dblclick(function () { 
-				ui.startRecord();
-			});
 			$("#playControl").unbind();
 			$("#playControl").click(function() { 
 					alert("Buffering...");
