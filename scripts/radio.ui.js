@@ -13,6 +13,13 @@ var ui = {
 		$.ctrl('R', function() {
 		    ui.startRecord();
 		});
+		try {
+			nativeWindow.x = (air.Screen.mainScreen.bounds.width - 300)
+			nativeWindow.y = (air.Screen.mainScreen.bounds.height - 580)
+		}
+		catch(err){
+			air.trace("Could not move window");
+		}
 	},
 	startPlayer: function(){
 		$(this).log("startPlayer clicked");
