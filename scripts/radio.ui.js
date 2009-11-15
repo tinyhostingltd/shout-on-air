@@ -75,7 +75,8 @@ var ui = {
 			showHeading: true,
 			headingText: prefs.stationname,
 			showProfileLink: true,
-			showTimestamp: true
+			showTimestamp: true,
+			search: prefs.twittersearch,
 		});	
 		setTimeout(ui.getTweets, 120*1000);
 	},

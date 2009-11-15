@@ -7,8 +7,8 @@ var prefs = {
 	streamurl: "",
 	streamport: 0,
 	twitterusername: "",
+	twittersearch: true,
 	header: "<h1>Shout-On-Air</h1>",
-	
 	buffersize: 1024,
 	debug: false,
 	error: false,
