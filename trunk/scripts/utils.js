@@ -48,6 +48,12 @@ Function.prototype.bind = function(){
     }
 }
 
+Date.prototype.getDateTimeStamp = function(){
+	var daynames = new Array( "Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
+	var monthnames = new Array( "January","February","March","April","May","June","July","August","September","October","November","December");
+	return daynames[this.getDay()] +"."+ this.getDate() +"."+ monthnames[this.getMonth()] +"."+ this.getFullYear() +"."+ this.getHours() +"."+ this.getMinutes();
+}
+
 $.ctrl = function(key, callback, args) {
     $(document).keydown(function(e) {
         if(!args) args=[]; // IE barks when args is null

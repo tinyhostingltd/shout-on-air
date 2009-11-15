@@ -16,6 +16,7 @@ var radio = {
 	buffertime: 2,
 	urlStream: null,
 	fileStream: null,
+	name: "Shout-On-Air",
 	init: function(uri){
 		this.uri = uri;
         this.log("You instantiated: "+ this.name);
@@ -94,7 +95,8 @@ var radio = {
 		this.fileStream = new air.FileStream();
 		this.urlStream.addEventListener(air.ProgressEvent.PROGRESS, this.e.writefile.bind(this));
 		this.urlStream.addEventListener(air.IOErrorEvent.IO_ERROR, this.e.error.bind(this));
-		this.file = air.File.desktopDirectory.resolvePath("DapperFM.mp3");
+		var d=new Date();
+		this.file = air.File.desktopDirectory.resolvePath(this.name +"-"+ d.getDateTimeStamp() +".mp3");
 		this.fileStream.openAsync(this.file, air.FileMode.WRITE);
 		this.urlStream.load(this.req);
 		this.play();

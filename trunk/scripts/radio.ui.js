@@ -31,6 +31,7 @@ var ui = {
 		$(this).log("startRecord clicked");	
 		$("#playControl").unbind();
 		shoutcastradio.stop(function(){
+			radio.name = prefs.stationname;
 			radio.init(prefs.streamurl + ":" + prefs.streamport);
 			radio.load();
 			radio.record();
