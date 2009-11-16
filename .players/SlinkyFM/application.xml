@@ -7,7 +7,7 @@
 	<!-- The name that is displayed in the AIR application installer. Optional. -->
 	<name>SlinkyFM</name>
 	<!-- An application version designator (such as "v1", "2.5", or "Alpha 1"). Required. -->
-	<version>1.8</version>
+	<version>1.81</version>
 	<!-- Description, displayed in the AIR application installer. Optional. -->
 	<description/>
 	<!-- Copyright information. Optional -->
