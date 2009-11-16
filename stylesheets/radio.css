@@ -18,8 +18,9 @@ body {
 	line-height: 1.125em;
 	color: #333;
 	background-color: #fff;
-		background-color: #ccc;
+	background-color: #ccc;
 }
+
 
 div#header {
 	margin-bottom: 1em;
@@ -93,5 +94,13 @@ div#footer {
 	color: #666;
 	border-top: 2px solid #ddd;
 	background-color: #808080;
+}
+#footer:after{
+	content: "Player: Courtenay Probert";
+	color: #999;
+	position: absolute;
+	bottom: 3px;
+	right: 15px;
+	font-size: 0.8em;
 }
 div#player{padding: 10px 10px 10px 10px;}
