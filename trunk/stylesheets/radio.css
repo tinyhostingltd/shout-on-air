@@ -96,7 +96,7 @@ div#footer {
 	background-color: #808080;
 }
 #footer:after{
-	content: "Player: Courtenay Probert";
+	content: "Player by: Courtenay Probert";
 	color: #999;
 	position: absolute;
 	bottom: 3px;
