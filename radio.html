@@ -5,7 +5,6 @@
 		<title>Shout-On-Air</title>
 		<meta name="author" content="Courtenay Probert" />
 
-		<link rel="shortcut icon" href="/favicon.ico" >
 		<link rel="stylesheet" href="stylesheets/radio.css" type="text/css" media="all">
 		<link rel="stylesheet" href="stylesheets/jquery.twitter.css" type="text/css" media="all">
 		<link type="text/css" href="stylesheets/themes/base/ui.all.css" rel="stylesheet" />
@@ -39,7 +38,7 @@
 					buffersize = prefs.buffersize;
 					shoutcastradio.debug = prefs.debug;
 					shoutcastradio.type = prefs.streamtype;
-					//shoutcastradio.toggletime = 20;
+					shoutcastradio.toggletime = prefs.bufferflush;
 					shoutcastradio.init(prefs.streamurl, prefs.streamport, prefs.streamfolder);
 					netmon.init();
 					netmon.onNetworkChange(true); //Check net and play if available;

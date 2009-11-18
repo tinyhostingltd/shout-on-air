@@ -7,6 +7,7 @@
 	<streamfolder>/1/rsj/mp3_128</streamfolder>
 	<streamtype>icecast</streamtype>
 	<twitterusername>Swiss+Jazz</twitterusername>
+	<bufferflush>1800</bufferflush>
 	<header>
 		<![CDATA[ 
 		<h1 style="color: #025682;">Swiss <em style='color:#5E7E19;'>Jazz</em></h1><h2>Nice and easy does it!</h2>
