@@ -4,7 +4,10 @@
 	<weburl>http://www.dapperfm.co.uk</weburl>
 	<streamurl>http://93.89.82.244</streamurl>
 	<streamport>8096</streamport>
+	<streamfolder>/</streamfolder>
+	<streamtype>shoutcast</streamtype>
 	<twitterusername>dapperfm</twitterusername>
+	<bufferflush>3600</bufferflush>
 	<header>
 		<![CDATA[ 
 		<h1>Dapper <em style='color:#5E7E19;'>FM</em></h1><h2>Call us now on (01685) 814848</h2>
