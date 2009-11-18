@@ -17,7 +17,6 @@ var radio = {
 	urlStream: null,
 	fileStream: null,
 	type: "shoutcast",
-	name: "Shout-On-Air",
 	init: function(uri){
 		this.uri = uri;
         this.log("You instantiated: "+ this.name);

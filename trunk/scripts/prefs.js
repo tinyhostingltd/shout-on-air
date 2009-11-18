@@ -8,6 +8,7 @@ var prefs = {
 	streamport: 0,
 	streamfolder: "/",
 	streamtype: "shoutcast",
+	bufferflush: 3600,
 	twitterusername: "",
 	twittersearch: true,
 	header: "<h1>Shout-On-Air</h1>",
@@ -56,8 +57,17 @@ var prefs = {
 				this.stationname = prefsXML.getElementsByTagName("stationname")[0].firstChild.nodeValue;
 				$(this).log("stationname: " + this.stationname);
 				
-				this.weburl = prefsXML.getElementsByTagName("weburl")[0].firstChild.nodeValue;
-				$(this).log("weburl: " + this.weburl);
+				var weburl = prefsXML.getElementsByTagName("weburl")[0].firstChild.nodeValue;
+				if (weburl != null) {
+					this.weburl = weburl;
+					$(this).log("weburl: " + this.weburl);
+				}
+				
+				var bufferflush = prefsXML.getElementsByTagName("bufferflush")[0].firstChild.nodeValue;
+				if (bufferflush != null) {
+					this.bufferflush = bufferflush;
+					$(this).log("bufferflush: " + this.bufferflush);
+				}
 				
 				this.streamurl = prefsXML.getElementsByTagName("streamurl")[0].firstChild.nodeValue;
 				$(this).log("streamurl: " + this.streamurl);
@@ -65,10 +75,14 @@ var prefs = {
 				this.streamport = prefsXML.getElementsByTagName("streamport")[0].firstChild.nodeValue;
 				$(this).log("streamport: " + this.streamport);
 				
-				this.streamfolder = prefsXML.getElementsByTagName("streamfolder")[0].firstChild.nodeValue;
+				var streamfolder = prefsXML.getElementsByTagName("streamfolder")[0].firstChild.nodeValue;
+				if(streamfolder != null)
+					this.streamfolder = streamfolder
 				$(this).log("streamfolder: " + this.streamfolder);
 				
-				this.streamtype = prefsXML.getElementsByTagName("streamtype")[0].firstChild.nodeValue;
+				var streamtype = prefsXML.getElementsByTagName("streamtype")[0].firstChild.nodeValue;
+				if(streamtype != null)
+					this.streamtype = streamtype;
 				$(this).log("streamtype: " + this.streamtype);
 				
 				this.twitterusername = prefsXML.getElementsByTagName("twitterusername")[0].firstChild.nodeValue;
