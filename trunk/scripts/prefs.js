@@ -6,6 +6,8 @@ var prefs = {
 	weburl: "",
 	streamurl: "",
 	streamport: 0,
+	streamfolder: "/",
+	streamtype: "shoutcast",
 	twitterusername: "",
 	twittersearch: true,
 	header: "<h1>Shout-On-Air</h1>",
@@ -53,12 +55,22 @@ var prefs = {
 				
 				this.stationname = prefsXML.getElementsByTagName("stationname")[0].firstChild.nodeValue;
 				$(this).log("stationname: " + this.stationname);
+				
 				this.weburl = prefsXML.getElementsByTagName("weburl")[0].firstChild.nodeValue;
 				$(this).log("weburl: " + this.weburl);
+				
 				this.streamurl = prefsXML.getElementsByTagName("streamurl")[0].firstChild.nodeValue;
 				$(this).log("streamurl: " + this.streamurl);
+				
 				this.streamport = prefsXML.getElementsByTagName("streamport")[0].firstChild.nodeValue;
 				$(this).log("streamport: " + this.streamport);
+				
+				this.streamfolder = prefsXML.getElementsByTagName("streamfolder")[0].firstChild.nodeValue;
+				$(this).log("streamfolder: " + this.streamfolder);
+				
+				this.streamtype = prefsXML.getElementsByTagName("streamtype")[0].firstChild.nodeValue;
+				$(this).log("streamtype: " + this.streamtype);
+				
 				this.twitterusername = prefsXML.getElementsByTagName("twitterusername")[0].firstChild.nodeValue;
 				$(this).log("twitterusername: " + this.twitterusername);
 				this.header = prefsXML.getElementsByTagName("header")[0].textContent; //$(this).log("header: "+ this.header);

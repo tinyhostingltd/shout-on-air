@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <application xmlns="http://ns.adobe.com/air/application/1.5">
 	<!-- The application identifier string, unique to this application. Required. -->
-	<id>uk.co.dapperfm</id>
+	<id>uk.me.probert.swissjazz</id>
 	<!-- Used as the filename for the application. Required. -->
-	<filename>DapperFM</filename>
+	<filename>Swiss Jazz</filename>
 	<!-- The name that is displayed in the AIR application installer. Optional. -->
-	<name>DapperFM</name>
+	<name>Swiss Jazz</name>
 	<!-- An application version designator (such as "v1", "2.5", or "Alpha 1"). Required. -->
-	<version>1.81</version>
+	<version>1.9</version>
 	<!-- Description, displayed in the AIR application installer. Optional. -->
 	<description/>
 	<!-- Copyright information. Optional -->
@@ -33,13 +33,13 @@
 		<!-- The window's initial width. Optional. -->
 		<width>295</width>
 		<!-- The window's initial height. Optional. -->
-		<height>550</height>
+		<height>600</height>
 		<!-- The window's initial x position. Optional. -->
 		<x>10</x>
 		<!-- The window's initial y position. Optional. -->
 		<y>10</y>
 		<!-- The window's minimum size, specified as a width/height pair, such as "400 200". Optional. -->
-		<minSize>295 130</minSize>
+		<minSize>295 115</minSize>
 		<!-- The window's initial maximum size, specified as a width/height pair, such as "1600 1200". Optional. -->
 		<maxSize>295 800</maxSize>
 	</initialWindow>

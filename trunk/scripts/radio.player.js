@@ -16,6 +16,7 @@ var radio = {
 	buffertime: 2,
 	urlStream: null,
 	fileStream: null,
+	type: "shoutcast",
 	name: "Shout-On-Air",
 	init: function(uri){
 		this.uri = uri;
@@ -23,7 +24,10 @@ var radio = {
     },
 	load: function(){
 		this.bufferloaded = false;
-		var rnduri = this.uri + "/;" + Math.round(Math.random() * 100000) + ".mp3"
+		var rnduri = this.uri;
+		if(this.type == "shoutcast"){
+		 	rnduri = this.uri + ";" + Math.round(Math.random() * 100000) + ".mp3"
+		}
 		this.req = new air.URLRequest(rnduri); 
 		this.req.cacheResponse = false;	
 		this.req.useCache = false;
@@ -134,29 +138,36 @@ var radio = {
 
 var shoutcastradio = {
 	url: "",
-	port: "",
+	port: "80",
+	folder: "/",
+	type: "shoutcast",
 	player1: {},
 	player2: {},
 	debug: false,
 	toggletime: 3600,
 	i: 0,
-	init: function(streamurl, streamport){
+	init: function(streamurl, streamport, streamfolder){
 		this.log("Loading Shoutcast Radio");
 		if (streamurl != "") 
 			this.url = streamurl;
 		
 		if (streamport != "") 
 			this.port = streamport;
+			
+		if (streamfolder != "") 
+			this.folder = streamfolder;
 		
 		if (this.url && this.port) {
-			var streamRndURL = this.url + ":" + this.port; //every instance is on a seperate stream
+			var streamRndURL = this.url + ":" + this.port + this.folder; //every instance is on a seperate stream
 			this.player1 = $.extend(true, {name: 'player1'}, radio);
 			this.player1.debug = this.debug;
+			this.player1.type = this.type;
 			this.player1.init(streamRndURL);
 			
 			streamRndURL = this.url + ":" + this.port;
 			this.player2 = $.extend(true, {name: 'player2'}, radio);
 			this.player2.debug = this.debug;
+			this.player2.type = this.type;
 			this.player2.init(streamRndURL);
 		}
 		else {

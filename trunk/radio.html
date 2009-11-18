@@ -38,8 +38,9 @@
 					ui.init();
 					buffersize = prefs.buffersize;
 					shoutcastradio.debug = prefs.debug;
+					shoutcastradio.type = prefs.streamtype;
 					//shoutcastradio.toggletime = 20;
-					shoutcastradio.init(prefs.streamurl, prefs.streamport);
+					shoutcastradio.init(prefs.streamurl, prefs.streamport, prefs.streamfolder);
 					netmon.init();
 					netmon.onNetworkChange(true); //Check net and play if available;
 				});
