@@ -4,7 +4,13 @@
 var ui = {
 	init: function(){
 		document.title = prefs.stationname;
-		$("#header").html(prefs.header);
+		$("#header").html(prefs.header)
+		
+		if(prefs.weburl != null){
+			$("#header").click(function(){
+				openInBrowser(prefs.weburl);
+			}).css('cursor', 'pointer');	
+		}
 		
 		this.setupslider();
 		this.getTweets();
