@@ -7,7 +7,7 @@
 	<!-- The name that is displayed in the AIR application installer. Optional. -->
 	<name>SlinkyFM</name>
 	<!-- An application version designator (such as "v1", "2.5", or "Alpha 1"). Required. -->
-	<version>1.81</version>
+	<version>1.9</version>
 	<!-- Description, displayed in the AIR application installer. Optional. -->
 	<description/>
 	<!-- Copyright information. Optional -->
@@ -33,7 +33,7 @@
 		<!-- The window's initial width. Optional. -->
 		<width>295</width>
 		<!-- The window's initial height. Optional. -->
-		<height>550</height>
+		<height>600</height>
 		<!-- The window's initial x position. Optional. -->
 		<x>10</x>
 		<!-- The window's initial y position. Optional. -->
