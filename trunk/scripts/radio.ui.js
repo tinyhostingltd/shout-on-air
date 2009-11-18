@@ -15,7 +15,7 @@ var ui = {
 		});
 		try {
 			nativeWindow.x = (air.Screen.mainScreen.bounds.width - 300)
-			nativeWindow.y = (air.Screen.mainScreen.bounds.height - 580)
+			nativeWindow.y = (air.Screen.mainScreen.bounds.height - 600)
 		}
 		catch(err){
 			air.trace("Could not move window");
@@ -35,11 +35,12 @@ var ui = {
 		});
 	},
 	startRecord: function(){
-		$(this).log("startRecord clicked");	
+		$(this).log("startRecord run");	
 		$("#playControl").unbind();
 		shoutcastradio.stop(function(){
 			radio.name = prefs.stationname;
-			radio.init(prefs.streamurl + ":" + prefs.streamport);
+			radio.type = prefs.streamtype;
+			radio.init(prefs.streamurl + ":" + prefs.streamport + prefs.streamfolder);
 			radio.load();
 			radio.record();
 			$("#playControl").click(function () { 
