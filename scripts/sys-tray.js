@@ -69,6 +69,13 @@ function nwMinimized(nativeWindowDisplayStateEvent) {
 // Util Methods
 function ShutDown(){
 	//cleanup code
+	var x = nativeWindow.x;
+	prefs.winx(x);
+	$(this).log("x: "+ x);
+	var y = nativeWindow.y;
+	prefs.winy(y);
+	$(this).log("y: "+ y);
+	$(this).log("ShutDown!");
 }
 function exit(){
 	var exitingEvent = new air.Event(air.Event.EXITING, false, true);

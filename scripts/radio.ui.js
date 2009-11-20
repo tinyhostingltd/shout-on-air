@@ -20,8 +20,23 @@ var ui = {
 		    ui.startRecord();
 		});
 		try {
-			nativeWindow.x = (air.Screen.mainScreen.bounds.width - 300)
-			nativeWindow.y = (air.Screen.mainScreen.bounds.height - 600)
+			var x = prefs.winx();
+			$(this).log("prefs x: "+ x);
+			if (x == null || x > air.Screen.mainScreen.bounds.width) {
+				nativeWindow.x = (air.Screen.mainScreen.bounds.width - 300);
+			}
+			else {
+				nativeWindow.x = x;
+			}
+			
+			var y = prefs.winy();
+			$(this).log("prefs y: "+ y);
+			if (y == null || y > air.Screen.mainScreen.bounds.height) {
+				nativeWindow.y = (air.Screen.mainScreen.bounds.height - 630);
+			}
+			else {
+				nativeWindow.y = y;
+			}
 		}
 		catch(err){
 			air.trace("Could not move window");
@@ -48,11 +63,17 @@ var ui = {
 			radio.type = prefs.streamtype;
 			radio.init(prefs.streamurl + ":" + prefs.streamport + prefs.streamfolder);
 			radio.load();
-			radio.record();
-			$("#playControl").click(function () { 
-					ui.stopRecord();
-			});	
-			$("#playControl img").attr("src", "/images/record.png");
+			
+			var desktop = air.File.desktopDirectory.resolvePath("*.mp3");
+		    try
+		    {
+		        desktop.browseForSave("Save MP3 As");
+		        desktop.addEventListener(air.Event.SELECT, ui.e.record);
+		    }
+		    catch(e)
+		    {
+		        air.trace(e.message)
+		    }
 		});
 	},
 	stopRecord: function(){
@@ -109,5 +130,16 @@ var ui = {
 			});	
 			$("#playControl img").attr("src", "/images/visualization.png");
 		}
-	}
+	},
+	e: {
+		record: function(e){
+			var file = e.target;
+			air.trace("record callback: "+ file);
+			radio.record(file);
+			$("#playControl").click(function () { 
+					ui.stopRecord();
+			});	
+			$("#playControl img").attr("src", "/images/record.png");
+		}
+	},
 }

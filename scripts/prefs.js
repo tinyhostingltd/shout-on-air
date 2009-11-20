@@ -38,6 +38,36 @@ var prefs = {
 				return 0.8;
 		}
 	},
+	winx: function(x){
+		if(x){ //Set
+			var data = new air.ByteArray(); // Peristant save the volume to the users 
+			data.writeUTFBytes(x);
+			air.EncryptedLocalStore.setItem('x', data);
+			return x;
+		}
+		else { //Get
+			x = air.EncryptedLocalStore.getItem('x');
+			if (x) 
+				return x.readUTFBytes(x.bytesAvailable);
+			else 
+				return null;
+		}
+	},
+	winy: function(y){
+		if(y){ //Set
+			var data = new air.ByteArray(); // Peristant save the volume to the users 
+			data.writeUTFBytes(y);
+			air.EncryptedLocalStore.setItem('y', data);
+			return y;
+		}
+		else { //Get
+			y = air.EncryptedLocalStore.getItem('y');
+			if (y) 
+				return y.readUTFBytes(y.bytesAvailable);
+			else 
+				return null;
+		}
+	},
 	loadprefs: function(){
 		var prefsFile = air.File.applicationDirectory;
 		prefsfile = prefsFile.resolvePath("config.xml");
