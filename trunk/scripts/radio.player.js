@@ -92,14 +92,25 @@ var radio = {
 			this.unload(); // this should clean the memory
 		}
 	},
-	record: function(){
+	record: function(file){
 		this.log(this.name + " recording");
 		this.urlStream = new air.URLStream();
 		this.fileStream = new air.FileStream();
 		this.urlStream.addEventListener(air.ProgressEvent.PROGRESS, this.e.writefile.bind(this));
 		this.urlStream.addEventListener(air.IOErrorEvent.IO_ERROR, this.e.error.bind(this));
-		var d=new Date();
-		this.file = air.File.desktopDirectory.resolvePath(this.name +"-"+ d.getDateTimeStamp() +".mp3");
+		
+		if (file == null) {
+			var d = new Date();
+			this.file = air.File.desktopDirectory.resolvePath(this.name + "-" + d.getDateTimeStamp() + ".mp3");
+		}
+		else {
+			if(!file.extension || file.extension.toLowerCase() != "mp3"){
+				this.log("no extension");
+				file.nativePath += ".mp3";
+			}
+			this.file = file;
+		}
+			
 		this.fileStream.openAsync(this.file, air.FileMode.WRITE);
 		this.urlStream.load(this.req);
 		this.play();
@@ -145,6 +156,7 @@ var shoutcastradio = {
 	debug: false,
 	toggletime: 3600,
 	i: 0,
+	timeoutID: 0,
 	init: function(streamurl, streamport, streamfolder){
 		this.log("Loading Shoutcast Radio");
 		if (streamurl != "") 
@@ -206,7 +218,7 @@ var shoutcastradio = {
 				});
 			}
 			shoutcastradio.i ++;
-			setTimeout(shoutcastradio.play, shoutcastradio.toggletime * 1000); // This toggles the players to clean the memory perodicaly (1 hours = 3600 secs)
+			this.timeoutID  = window.setTimeout(shoutcastradio.play, shoutcastradio.toggletime * 1000); // This toggles the players to clean the memory perodicaly (1 hours = 3600 secs)
 	},
 	stop: function(callback){
 		if (this.player1.playing) 
@@ -214,6 +226,8 @@ var shoutcastradio = {
 		
 		if (this.player2.playing) 
 			this.player2.stop();
+		
+		window.clearTimeout(this.timeoutID)
 		
 		if (typeof callback == 'function') 
 			callback.call(this);
