@@ -16,7 +16,7 @@ var prefs = {
 	debug: false,
 	error: false,
 	init: function(callback){
-		this.debug = true;
+		this.debug = false;
 		this.buffersize = 800;
 		this.loadprefs();
 		

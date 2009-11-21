@@ -64,11 +64,14 @@ var ui = {
 			radio.init(prefs.streamurl + ":" + prefs.streamport + prefs.streamfolder);
 			radio.load();
 			
-			var desktop = air.File.desktopDirectory.resolvePath("*.mp3");
 		    try
 		    {
-		        desktop.browseForSave("Save MP3 As");
-		        desktop.addEventListener(air.Event.SELECT, ui.e.record);
+				var d = new Date();
+				var file = "Music/" + prefs.stationname + "-" + d.getDateTimeStamp() + ".mp3";
+				var mp3 = air.File.userDirectory.resolvePath(file);
+				//var mp3 = air.File.desktopDirectory.resolvePath("*.mp3");
+		        mp3.browseForSave("Save MP3 As");
+		        mp3.addEventListener(air.Event.SELECT, ui.e.record);
 		    }
 		    catch(e)
 		    {
@@ -134,7 +137,7 @@ var ui = {
 	e: {
 		record: function(e){
 			var file = e.target;
-			air.trace("record callback: "+ file);
+			$(this).log("record callback: "+ file.nativePath);
 			radio.record(file);
 			$("#playControl").click(function () { 
 					ui.stopRecord();
