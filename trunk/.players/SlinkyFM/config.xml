@@ -4,7 +4,10 @@
 	<weburl>http://www.slinky.fm/</weburl>
 	<streamurl>http://93.89.82.244</streamurl>
 	<streamport>8010</streamport>
+	<streamfolder>/</streamfolder>
+	<streamtype>shoutcast</streamtype>
 	<twitterusername>slinkyfm</twitterusername>
+	<bufferflush>3600</bufferflush>
 	<header>
 		<![CDATA[ 
 		<h1>Slinky.<em style='color:#CC127F;'>FM</em></h1><h2>Phone your shout to +442071831641</h2>
