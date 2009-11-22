@@ -189,6 +189,7 @@ var shoutcastradio = {
 	},
 	play: function(callback){
 			$(this).log("Swaping players.  Iteration: " + shoutcastradio.i);
+			window.clearTimeout(this.timeoutID);
 			
 			if (shoutcastradio.player1.playing) {
 				shoutcastradio.player2.load()
@@ -227,7 +228,7 @@ var shoutcastradio = {
 		if (this.player2.playing) 
 			this.player2.stop();
 		
-		window.clearTimeout(this.timeoutID)
+		window.clearTimeout(this.timeoutID);
 		
 		if (typeof callback == 'function') 
 			callback.call(this);
