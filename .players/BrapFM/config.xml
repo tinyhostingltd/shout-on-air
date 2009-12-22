@@ -10,7 +10,7 @@
 	<bufferflush>3600</bufferflush>
 	<header>
 		<![CDATA[ 
-		<h1>Brap<em style='color:#5E7E19;'>.FM</em></h1><h2>Downtempo to Techno and everything inbetween</h2>
+		<h1 style="color: #91191C;">Brap<em style='color:#000;'>.FM</em></h1><h2>Downtempo to Techno and everything inbetween</h2>
 		]]>
 	</header>
 </prefs>
