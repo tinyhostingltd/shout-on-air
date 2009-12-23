@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <prefs>
 	<stationname>Brap.FM</stationname>
-	<weburl>http://www.bram.fm</weburl>
+	<weburl>http://www.brap.fm</weburl>
 	<streamurl>http://87.117.250.5</streamurl>
 	<streamport>9120</streamport>
 	<streamfolder>/</streamfolder>
 	<streamtype>shoutcast</streamtype>
 	<twitterusername>brapradio</twitterusername>
 	<bufferflush>3600</bufferflush>
-	<header>
-		<![CDATA[ 
-		<h1 style="color: #91191C;">Brap<em style='color:#000;'>.FM</em></h1><h2>Downtempo to Techno and everything inbetween</h2>
-		]]>
-	</header>
+	<header />
 </prefs>
