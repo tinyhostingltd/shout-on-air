@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<prefs>
+	<stationname>LightFM</stationname>
+	<weburl>http://www.lightfm.net/</weburl>
+	<streamurl>http://radio.hnsystems.net</streamurl>
+	<streamport>8000</streamport>
+	<streamfolder>/</streamfolder>
+	<streamtype>shoutcast</streamtype>
+	<twitterusername>lightfmradio</twitterusername>
+	<bufferflush>1800</bufferflush>
+	<header>
+		<![CDATA[ 
+		<h1>Light<em style='color:#00B0F1;'>FM</em></h1><h2>Insperation for the soul</h2>
+		]]>
+	</header>
+</prefs>
