@@ -22,6 +22,16 @@ function openInBrowser(url) {
 	air.navigateToURL( new air.URLRequest(url)); 
 }
 
+function batchWireLinks(id){
+	$(id +" a:external").each(function(i){
+		$(this).log("Adding click to link: "+ $(this).attr('href'));
+		$(this).click(function(e){
+			openInBrowser($(this).attr('href'));
+			e.preventDefault();
+		});
+	});
+}
+
 function playSound(sound){
 	var file = air.File.applicationDirectory.resolvePath(sound);
 	var mp3 = new air.Sound(new air.URLRequest(file.url));

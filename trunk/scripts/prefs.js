@@ -2,22 +2,21 @@
  * @author cprobert
  */
 var prefs = {
-	stationname: "",
-	weburl: "",
+	stationname: "Shout-On-Air",
+	weburl: "#",
 	streamurl: "",
 	streamport: 0,
 	streamfolder: "/",
 	streamtype: "shoutcast",
-	bufferflush: 3600,
-	twitterusername: "",
+	toggletime: 1800,
+	adserver: null,
+	twitterusername: null,
 	twittersearch: true,
 	header: "<h1>Shout-On-Air</h1>",
-	buffersize: 1024,
-	debug: false,
+	buffertime: 3000,
+	debug: true,
 	error: false,
 	init: function(callback){
-		this.debug = false;
-		this.buffersize = 800;
 		this.loadprefs();
 		
 		if (!this.error && typeof callback == 'function') 
@@ -80,44 +79,56 @@ var prefs = {
 				stream.open(prefsfile, air.FileMode.READ);
 				prefsXML = stream.readUTFBytes(stream.bytesAvailable);
 				stream.close();
-				//air.trace("prefsXML: "+ prefsXML);	
 				var domParser = new DOMParser();
 				prefsXML = domParser.parseFromString(prefsXML, "text/xml");
 				
-				this.stationname = prefsXML.getElementsByTagName("stationname")[0].firstChild.nodeValue;
-				$(this).log("stationname: " + this.stationname);
-				
-				var weburl = prefsXML.getElementsByTagName("weburl")[0].firstChild.nodeValue;
-				if (weburl != null) {
-					this.weburl = weburl;
-					$(this).log("weburl: " + this.weburl);
-				}
-				
-				var bufferflush = prefsXML.getElementsByTagName("bufferflush")[0].firstChild.nodeValue;
-				if (bufferflush != null) {
-					this.bufferflush = bufferflush;
-					$(this).log("bufferflush: " + this.bufferflush);
-				}
-				
+				//Using this type of accessor results in a fail if not not present
 				this.streamurl = prefsXML.getElementsByTagName("streamurl")[0].firstChild.nodeValue;
 				$(this).log("streamurl: " + this.streamurl);
 				
 				this.streamport = prefsXML.getElementsByTagName("streamport")[0].firstChild.nodeValue;
 				$(this).log("streamport: " + this.streamport);
 				
-				var streamfolder = prefsXML.getElementsByTagName("streamfolder")[0].firstChild.nodeValue;
-				if(streamfolder != null)
+				//Using this type of accessor results in a empty string if not not present
+				var streamfolder = $(prefsXML).find('streamfolder').text();
+				if(streamfolder != "")
 					this.streamfolder = streamfolder
 				$(this).log("streamfolder: " + this.streamfolder);
 				
-				var streamtype = prefsXML.getElementsByTagName("streamtype")[0].firstChild.nodeValue;
-				if(streamtype != null)
-					this.streamtype = streamtype;
-				$(this).log("streamtype: " + this.streamtype);
+				this.stationname = $(prefsXML).find('stationname').text();
+				$(this).log("stationname: " + this.stationname);
 				
-				this.twitterusername = prefsXML.getElementsByTagName("twitterusername")[0].firstChild.nodeValue;
-				$(this).log("twitterusername: " + this.twitterusername);
-				this.header = prefsXML.getElementsByTagName("header")[0].textContent; //$(this).log("header: "+ this.header);
+				var weburl = prefsXML.getElementsByTagName("weburl")[0].firstChild.nodeValue;
+				$(this).log("weburl: " + weburl);
+				if (weburl != "")//if empty use default
+					this.weburl = weburl;
+				
+				var adserver = $(prefsXML).find('adserver').text();
+				$(this).log("adserver: " + adserver);
+				if (adserver != "")
+					this.adserver = adserver;
+				
+				var toggletime = $(prefsXML).find('toggletime').text();
+				$(this).log("toggletime: " + toggletime);
+				if (toggletime != "")
+					this.toggletime = toggletime;
+				
+				var buffertime = $(prefsXML).find('buffertime').text();
+				$(this).log("buffertime: " + buffertime);
+				if (buffertime != "")
+					this.buffertime = parseInt(buffertime);
+				
+				var streamtype = $(prefsXML).find('streamtype').text();
+				$(this).log("streamtype: " + streamtype);
+				if(streamtype != "")
+					this.streamtype = streamtype;
+				
+				var twitterusername = $(prefsXML).find('twitterusername').text();
+				$(this).log("twitterusername: " + twitterusername);
+				if(twitterusername != "")
+					this.twitterusername = twitterusername;
+				
+				this.header = $(prefsXML).find('header').text();
 			}
 			catch(err){
 				this.error = true;

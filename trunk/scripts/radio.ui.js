@@ -6,6 +6,11 @@ var ui = {
 		document.title = prefs.stationname;
 		$("#header").html(prefs.header)
 		
+		if (prefs.adserver == null) {
+			$("#adspace").hide();
+			$("#footer").css({'bottom' : '0px'});
+		}
+			
 		if(prefs.weburl != null){
 			$("#header").click(function(){
 				openInBrowser(prefs.weburl);
@@ -13,7 +18,6 @@ var ui = {
 		}
 		
 		this.setupslider();
-		this.getTweets();
 		this.getTweets();
 		
 		$.ctrl('R', function() {
@@ -97,19 +101,21 @@ var ui = {
 		});	
 	},
 	getTweets: function(){
-		$("#twitter").getTwitter({
-			userName: prefs.twitterusername,
-			numTweets: 3,
-			loaderText: "Loading tweets...",
-			slideIn: true,
-			slideDuration: 750,
-			showHeading: true,
-			headingText: prefs.stationname,
-			showProfileLink: true,
-			showTimestamp: true,
-			search: prefs.twittersearch,
-		});	
-		setTimeout(ui.getTweets, 120*1000);
+		if (prefs.twitterusername != null) {
+			$("#twitter").getTwitter({
+				userName: prefs.twitterusername,
+				numTweets: 3,
+				loaderText: "Loading tweets...",
+				slideIn: true,
+				slideDuration: 750,
+				showHeading: true,
+				headingText: prefs.stationname,
+				showProfileLink: true,
+				showTimestamp: true,
+				search: prefs.twittersearch,
+			});
+			setTimeout(ui.getTweets, 120 * 1000);
+		}
 	},
 	wire: {
 		start: function(){
