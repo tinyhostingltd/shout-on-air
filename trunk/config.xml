@@ -9,7 +9,7 @@
 	<twitterusername>dapperfm</twitterusername>
 	<toggletime>1800</toggletime><!--How many seconds to toggle players (cleans memory)-->
 	<buffertime>3000</buffertime><!--How many miliseconds to hols in buffer memory-->
-	<adserver>http://probert.me.uk/adspace/ads.xml</adserver>
+	<adserver>http://shout-on-air.googlecode.com/svn/trunk/.players/Default/ads.xml</adserver>
 	<header>
 		<![CDATA[ 
 		<h1>Dapper <em style='color:#5E7E19;'>FM</em></h1><h2>Call us now on (01685) 814848</h2>

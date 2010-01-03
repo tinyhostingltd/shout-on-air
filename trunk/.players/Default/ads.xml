@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ads>
-	<ad url="http://www.ipassexam.com" img="images/banners/ipe-banner.gif" name="iPassExam" />
-	<ad url="http://www.bbc.co.uk/doctorwho" img="images/banners/who-banner.jpg" name="Doctor Who" />
+	<ad url="http://www.ipassexam.com" img="http://shout-on-air.googlecode.com/svn/trunk/.players/Default/banners/ipe-banner.gif" name="iPassExam" />
+	<ad url="http://www.bbc.co.uk/doctorwho" img="http://shout-on-air.googlecode.com/svn/trunk/.players/Default/banners/who-banner.jpg" name="Doctor Who" />
 </ads>
