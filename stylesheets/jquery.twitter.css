@@ -1,13 +1,15 @@
-#twitter{background-color: #fff;}
+#twitter{background-color: #fff; width: 100%}
+
+/*
 .twitted {
 	width: 16em;
 	margin-bottom: 1.5em;
 	border: 1px solid #888;
 }
-
+*/
 .twitted h2 {
-	margin: 0;
-	padding: 0.3em 0.8em;
+	margin: 0px;
+	padding: 5px 10px;
 	font-size: 1em;
 	color: #fff;
 	background-color: #888;
@@ -16,19 +18,21 @@
 .twitted p.preLoader {
 	margin: 0;
 	padding: 1em 1em 1em 3em;
-	background: transparent url("images/loader.gif") 1em center no-repeat;
-	/* generate your own loader gif: http://www.ajaxload.info */
+	background: transparent url("../images/loader.gif") 1em center no-repeat;
 }
 
 .twitted ul#twitter_update_list {
-	margin: 0;
-	padding: 0 0.8em;
+	margin: 0;	
+	padding: 0px;
 	list-style-type: none;
 }
 
 .twitted ul#twitter_update_list li {
 	margin: 0;
+	padding: 10px;
+	/*
 	padding: 0.8em 0 1em 0;
+	*/
 	border-bottom: 1px solid #ccc;
 }
 
@@ -57,7 +61,7 @@
 .twitted p.profileLink {
 	display: block;
 	margin: 0;
-	padding: 0.3em 1em;
+	padding: 5px 10px;
 	color: #fff;
 	background-color: #ddd;
 }

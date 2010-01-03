@@ -1,88 +1,92 @@
 /**
  * @author Courtenay Probert
  */
-var radio = {
-	playing: false,
-	s: null,
-	uri: "",
-	req: null,
-	context: null,
-	channel: null,
-	pausePosition: 0,
-	buffertime: 2,
+var radio = {// Global Properties
 	debug: false,
-	bufferloaded: false,
-	buffersize: 500,
-	buffertime: 2,
-	urlStream: null,
-	fileStream: null,
 	type: "shoutcast",
+	playing: false,
+	buffertime: 3000, // 3 secs
+	p:{// Private vars
+		pausePosition: 0,
+		s: null,
+		req: null,
+		context: null,
+		channel: null,
+		urlStream: null,
+		fileStream: null,
+		playCallback: null,
+		uri: "",
+		bufferloopcount: 1,
+	},
 	init: function(uri){
-		this.uri = uri;
+		this.p.uri = uri;
         this.log("You instantiated: "+ this.name);
     },
 	load: function(){
-		this.bufferloaded = false;
-		var rnduri = this.uri;
+		var rnduri = this.p.uri;
 		if(this.type == "shoutcast"){
-		 	rnduri = this.uri + ";" + Math.round(Math.random() * 100000) + ".mp3"
+		 	rnduri = this.p.uri + ";" + Math.round(Math.random() * 100000) + ".mp3"
 		}
-		this.req = new air.URLRequest(rnduri); 
-		this.req.cacheResponse = false;	
-		this.req.useCache = false;
+		this.p.req = new air.URLRequest(rnduri); 
+		this.p.req.cacheResponse = false;	
+		this.p.req.useCache = false;
 		this.log("Loading: "+ rnduri);
 		
-		this.s = new air.Sound();
-		this.s.addEventListener(air.IOErrorEvent.IO_ERROR, this.e.error.bind(this)); 
-		this.s.addEventListener(air.ProgressEvent.PROGRESS, this.e.progress.bind(this)); 
-		this.context = new air.SoundLoaderContext(buffersize, true); 
-		this.s.load(this.req, this.context); 
+		this.p.s = new air.Sound();
+		this.p.s.addEventListener(air.IOErrorEvent.IO_ERROR, this.e.error.bind(this)); 
+		this.p.s.addEventListener(air.ProgressEvent.PROGRESS, this.e.progress.bind(this)); 
+		//this.p.s.addEventListener(air.Event.ID3, this.e.id3.bind(this));
+		this.p.s.addEventListener(air.Event.COMPLETE, this.e.complete.bind(this));
+		this.p.context = new air.SoundLoaderContext(this.buffertime, false); 
+		this.p.s.load(this.p.req, this.p.context); 
 		this.log("Loaded player: "+ this.name);
 	},
 	unload: function(){
-		if (this.s != null) {
+		if (this.p.s != null) {
 			try {
-				this.s.close();
+				this.p.s.close();
 			}
 			catch(err){
 				this.log("s.close - err: "+ err);
 			}
-			this.context = null;
-			this.req = null; //I've moved initialisation from load to the constructor, so dont close here
-			this.s = null;
+			this.p.context = null;
+			this.p.req = null; //I've moved initialisation from load to the constructor, so dont close here
+			this.p.s = null;
 			this.log("Unloaded player: "+ this.name);
 		}
 	},
 	play: function(callback){
-		if (this.bufferloaded) {
+		this.p.playCallback = callback;
+		if (!this.p.s.isBuffering){
 			this.log("Buffer is loaded - Now playing");
 			this.playing = true;
-			this.channel = this.s.play(); //this.pausePosition
-			if(this.buffertime > 1)
-				this.buffertime -= 1;
+			this.p.channel = this.p.s.play(this.p.pausePosition); 
+			if(this.p.bufferloopcount > 1)
+				this.p.bufferloopcount -= 1;
 			this.log("Started player: "+ this.name);
 			
 			if(typeof callback == 'function'){
-		        callback.call(this); // Stop other player
+				this.log(this.name +" callback");
+		        this.p.playCallback.call(this); // Stop other player
 		    }
 		}
 		else{
-			$(this).log("Buffer not loaded - trying again in "+ this.buffertime +" seconds");
-			$(this).oneTime(this.buffertime *1000, function(event) {
-				this.buffertime += 1;
+			$(this).log("Buffer not loaded - trying again in "+ this.p.bufferloopcount +" seconds");
+			$(this).oneTime(this.p.bufferloopcount * 1000, function(event) {
+				this.p.bufferloopcount += 1;
 				this.play(callback);
 			});
 		}
 	},
 	stop: function(){
 		
-		if (this.channel == null) {
+		if (this.p.channel == null) {
 			this.playing = false;
 		}
 		else {
 			try {
-				this.pausePosition = this.channel.position; //not using at the mo
-				this.channel.stop();
+				this.p.pausePosition = this.p.channel.position; //not using at the mo
+				this.p.channel.stop();
 				this.playing = false;
 				this.log("Stopped player: "+ this.name);
 			} 
@@ -94,10 +98,10 @@ var radio = {
 	},
 	record: function(file){
 		this.log(this.name + " recording");
-		this.urlStream = new air.URLStream();
-		this.fileStream = new air.FileStream();
-		this.urlStream.addEventListener(air.ProgressEvent.PROGRESS, this.e.writefile.bind(this));
-		this.urlStream.addEventListener(air.IOErrorEvent.IO_ERROR, this.e.error.bind(this));
+		this.p.urlStream = new air.URLStream();
+		this.p.fileStream = new air.FileStream();
+		this.p.urlStream.addEventListener(air.ProgressEvent.PROGRESS, this.e.writefile.bind(this));
+		this.p.urlStream.addEventListener(air.IOErrorEvent.IO_ERROR, this.e.error.bind(this));
 		
 		if (file == null) {
 			var d = new Date();
@@ -111,24 +115,34 @@ var radio = {
 			this.file = file;
 		}
 			
-		this.fileStream.openAsync(this.file, air.FileMode.WRITE);
-		this.urlStream.load(this.req);
+		this.p.fileStream.openAsync(this.file, air.FileMode.WRITE);
+		this.p.urlStream.load(this.p.req);
 		this.play();
 	},
 	stoprecord: function(){
-		if(this.urlStream.connected)
-			this.urlStream.close();
-		this.fileStream.close();
+		if(this.p.urlStream.connected)
+			this.p.urlStream.close();
+		this.p.fileStream.close();
 		this.stop();
 	},
 	e: {
+		complete: function(event){
+			alert("Finished playing :-("); 
+		},
+		id3: function(event){
+			var id3 = event.target.id3; 
+		    air.trace("Received ID3 Info:"); 
+		    for (propName in id3) 
+		    { 
+		        air.trace(propName + " = " + id3[propName]); 
+		    } 
+		},
 		progress: function(event){
-			// Could i flush when event.bytesLoaded  = x ??? (stop and close)
-			var loadedPct = Math.round(100 * (event.bytesLoaded / this.buffersize));
-			if (loadedPct >= 100) 
-				this.bufferloaded = true;
-			else 
-				$(this).log(this.name +" buffer: " + loadedPct + "%");
+			//event.bytesLoaded
+			//air.trace(this.p.s.isBuffering);
+				
+			// Could i flush when event.bytesLoaded  > than 10 meg? (stop and close) 
+			//if (event.bytesLoaded > 10 * 1024) 
 		},
 		error: function(event){
 			this.log(event.text);
@@ -136,8 +150,8 @@ var radio = {
 		},
 		writefile: function(){
 			var dataBuffer = new air.ByteArray();
-			this.urlStream.readBytes(dataBuffer, 0, this.urlStream.bytesAvailable);
-			this.fileStream.writeBytes(dataBuffer, 0, dataBuffer.length);
+			this.p.urlStream.readBytes(dataBuffer, 0, this.p.urlStream.bytesAvailable);
+			this.p.fileStream.writeBytes(dataBuffer, 0, dataBuffer.length);
 	},
 	},
 	log: function(msg){
@@ -147,16 +161,19 @@ var radio = {
 };
 
 var shoutcastradio = {
+	debug: false,
+	type: "shoutcast",
+	toggletime: 3600,
+	buffertime: 3000,
 	url: "",
 	port: "80",
 	folder: "/",
-	type: "shoutcast",
-	player1: {},
-	player2: {},
-	debug: false,
-	toggletime: 3600,
-	i: 0,
-	timeoutID: 0,
+	p:{
+		player1: {},
+		player2: {},
+		i: 0,
+		timeoutID: 0
+	},
 	init: function(streamurl, streamport, streamfolder){
 		this.log("Loading Shoutcast Radio");
 		if (streamurl != "") 
@@ -170,16 +187,18 @@ var shoutcastradio = {
 		
 		if (this.url && this.port) {
 			var streamRndURL = this.url + ":" + this.port + this.folder; //every instance is on a seperate stream
-			this.player1 = $.extend(true, {name: 'player1'}, radio);
-			this.player1.debug = this.debug;
-			this.player1.type = this.type;
-			this.player1.init(streamRndURL);
+			this.p.player1 = $.extend(true, {name: 'player1'}, radio);
+			this.p.player1.debug = this.debug;
+			this.p.player1.type = this.type;
+			this.p.player1.buffertime = this.buffertime;
+			this.p.player1.init(streamRndURL);
 			
 			streamRndURL = this.url + ":" + this.port;
-			this.player2 = $.extend(true, {name: 'player2'}, radio);
-			this.player2.debug = this.debug;
-			this.player2.type = this.type;
-			this.player2.init(streamRndURL);
+			this.p.player2 = $.extend(true, {name: 'player2'}, radio);
+			this.p.player2.debug = this.debug;
+			this.p.player2.type = this.type;
+			this.p.player2.buffertime = this.buffertime;
+			this.p.player2.init(streamRndURL);
 		}
 		else {
 			alert("No URL or Port!");
@@ -188,47 +207,53 @@ var shoutcastradio = {
 		}
 	},
 	play: function(callback){
-			$(this).log("Swaping players.  Iteration: " + shoutcastradio.i);
-			window.clearTimeout(this.timeoutID);
+			$(this).log("Swaping players.  Iteration: " + shoutcastradio.p.i);
+			window.clearTimeout(this.p.timeoutID);
 			
-			if (shoutcastradio.player1.playing) {
-				shoutcastradio.player2.load()
-				shoutcastradio.player2.play(function(){
+			if (shoutcastradio.p.player1.playing) {
+				shoutcastradio.p.player2.load()
+				shoutcastradio.p.player2.play(function(){
 					/*
 					for (i = 1; i <= 0; i-0.1) {
-						shoutcastradio.player1.channel.soundTransform = new air.SoundTransform(i, 0);
+						shoutcastradio.p.player1.p.channel.soundTransform = new air.SoundTransform(i, 0);
 					}
 					*/
-					shoutcastradio.player1.stop();
+					shoutcastradio.p.player1.stop();
 					if (typeof callback == 'function') 
 						callback.call(this);
 				});
 			}
 			else {
-				shoutcastradio.player1.load()//.log("loading player 1");
-				shoutcastradio.player1.play(function(){
+				shoutcastradio.p.player1.load()//.log("loading player 1");
+				shoutcastradio.p.player1.play(function(){
 					/*
 					for (i = 1; i <= 0; i - 0.1) {
-						shoutcastradio.player2.channel.soundTransform = new air.SoundTransform(i, 0);
+						shoutcastradio.p.player2.p.channel.soundTransform = new air.SoundTransform(i, 0);
 						$(this).log(i);
 					}
 					*/
-					shoutcastradio.player2.stop();
+					shoutcastradio.p.player2.stop();
 					if (typeof callback == 'function') 
 						callback.call(this);
 				});
 			}
-			shoutcastradio.i ++;
-			this.timeoutID  = window.setTimeout(shoutcastradio.play, shoutcastradio.toggletime * 1000); // This toggles the players to clean the memory perodicaly (1 hours = 3600 secs)
+			shoutcastradio.p.i ++;
+			this.p.timeoutID  = window.setTimeout(shoutcastradio.play, shoutcastradio.toggletime * 1000); // This toggles the players to clean the memory perodicaly (1 hours = 3600 secs)
 	},
 	stop: function(callback){
-		if (this.player1.playing) 
-			this.player1.stop();
+		this.log("Stoping shoutcastradio");
 		
-		if (this.player2.playing) 
-			this.player2.stop();
+		if (this.p.player1.playing) {
+			this.log("Stoping player1");
+			this.p.player1.stop();
+		}
 		
-		window.clearTimeout(this.timeoutID);
+		if (this.p.player2.playing) {
+			this.log("Stoping player2");
+			this.p.player2.stop();
+		}
+		
+		window.clearTimeout(this.p.timeoutID);
 		
 		if (typeof callback == 'function') 
 			callback.call(this);
