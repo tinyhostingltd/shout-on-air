@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<prefs>
+	<stationname>rfmradio.co.uk</stationname>
+	<weburl>http://www.rfmradio.co.uk</weburl>
+	<streamurl>http://91.121.139.31</streamurl>
+	<streamport>9004</streamport>
+	<streamfolder>/</streamfolder>
+	<streamtype>shoutcast</streamtype>
+	<twitterusername>rfmradio_co_uk</twitterusername>
+	<toggletime>1800</toggletime><!--How many seconds to toggle players (cleans memory)-->
+	<buffertime>3000</buffertime><!--How many miliseconds to hols in buffer memory-->
+	<adserver>http://www.probert.me.uk/ads/proads/ads.xml</adserver>
+	<header>
+		<![CDATA[ 
+		<h1>rfmradio<span style='color:#00B0F1;'>.co.uk</span></h1><h2>Royalty Free Music Radio</h2>
+		]]>
+	</header>
+</prefs>
