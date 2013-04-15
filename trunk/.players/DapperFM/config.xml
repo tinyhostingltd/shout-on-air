@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <prefs>
 	<stationname>DapperFM</stationname>
+    <versionNumber>2.2</versionNumber>
 	<weburl>http://www.dapperfm.co.uk</weburl>
 	<streamurl>http://groove.wavestreamer.com</streamurl>
 	<streamport>3828</streamport>
