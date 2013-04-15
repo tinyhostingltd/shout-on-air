@@ -2,8 +2,8 @@
 <prefs>
 	<stationname>DapperFM</stationname>
 	<weburl>http://www.dapperfm.co.uk</weburl>
-	<streamurl>http://93.89.82.244</streamurl>
-	<streamport>8096</streamport>
+	<streamurl>http://groove.wavestreamer.com</streamurl>
+	<streamport>3828</streamport>
 	<streamfolder>/</streamfolder>
 	<streamtype>shoutcast</streamtype>
 	<twitterusername>dapperfm</twitterusername>

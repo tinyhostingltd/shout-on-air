@@ -2,11 +2,12 @@
 <prefs>
 	<stationname>Brap.FM</stationname>
 	<weburl>http://www.brap.fm</weburl>
-	<streamurl>http://87.117.250.5</streamurl>
-	<streamport>9120</streamport>
+	<streamurl>http://delicious.wavestreamer.com</streamurl>
+	<streamport>4626</streamport>
 	<streamfolder>/</streamfolder>
 	<streamtype>shoutcast</streamtype>
 	<twitterusername>brapradio</twitterusername>
 	<bufferflush>3600</bufferflush>
+    <adserver>http://shout-on-air.probert.me.uk/adserver/ads.xml</adserver>
 	<header />
 </prefs>
