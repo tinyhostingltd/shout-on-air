@@ -16,5 +16,5 @@ echo Setting name to %n%
 
 echo Building %n%-%v%.air
 adt -package -storetype pkcs12 -keystore cert.p12 -storepass LetItAllOut %n%-%v%.air application.xml config.xml radio.html icons images lib scripts stylesheets
-
+echo Complete
 pause
