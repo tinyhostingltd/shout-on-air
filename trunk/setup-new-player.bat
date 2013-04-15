@@ -20,9 +20,9 @@ if "%player%" == "" (
 )
 
 echo Copying %player% config
-xcopy "./.players/%player%/config.xml" config.xml /f /y /r
+copy "./.players/%player%/config.xml" config.xml /y /a /v
 echo Copying %player% icons
-xcopy "./.players/%player%/icons/*.*" icons /f /y /r
+xcopy "./.players/%player%/icons/*.*" icons /y /r
 
 endlocal
 echo Complete
