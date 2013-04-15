@@ -103,7 +103,7 @@ var ui = {
 	getTweets: function(){
 		if (prefs.twitterusername != null) {
 			$("#twitter").getTwitter({
-				userName: prefs.twitterusername,
+				userName: prefs.twitterusername.toLowerCase(),
 				numTweets: 3,
 				loaderText: "Loading tweets...",
 				slideIn: true,
