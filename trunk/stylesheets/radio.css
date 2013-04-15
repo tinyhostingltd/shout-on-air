@@ -107,9 +107,12 @@ div#footer {
 	border-top: 2px solid #ddd;
 	background-color: #808080;
 }
+div#footer a {
+    color: #666;
+    text-decoration:none;
+}
 
-#footer:after{
-	content: "Player by: Courtenay Probert";
+#copyright{
 	color: #999;
 	position: absolute;
 	bottom: 3px;
