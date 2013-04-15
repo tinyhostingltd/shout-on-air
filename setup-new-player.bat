@@ -24,6 +24,21 @@ copy ".\.players\%player%\config.xml" config.xml /y /a /v
 echo Copying %player% icons
 xcopy ".\.players\%player%\icons" .\icons /y /r /i
 
+echo Creating application.xml
+.\buildtools\msxsl.exe config.xml .\buildtools\application.xsl -o application.xml
+
+rem Get Version
+.\buildtools\msxsl.exe application.xml .\buildtools\version.xsl>.\buildtools\v
+set /p v=<.\buildtools\v
+del .\buildtools\v
+echo Setting version to %v%
+
+rem Get Filename
+.\buildtools\msxsl.exe application.xml .\buildtools\name.xsl>.\buildtools\n
+set /p n=<.\buildtools\n
+del .\buildtools\n
+echo Setting name to %n%
+
 endlocal
 echo Complete
 pause
