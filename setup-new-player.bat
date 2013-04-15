@@ -11,7 +11,7 @@ echo .
 
 rem Set player 
 if "%1" == "" (
-    set /p player=Enter name the name of the folder of your .player:  
+    set /p player=Enter player name:  
 ) else (
 	set "player=%1"
 )
@@ -20,9 +20,9 @@ if "%player%" == "" (
 )
 
 echo Copying %player% config
-copy "./.players/%player%/config.xml" config.xml /y /a /v
+copy ".\.players\%player%\config.xml" config.xml /y /a /v
 echo Copying %player% icons
-xcopy "./.players/%player%/icons/*.*" icons /y /r
+xcopy ".\.players\%player%\icons" .\icons /y /r /i
 
 endlocal
 echo Complete
