@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<prefs>
+	<stationname>DapperFM</stationname>
+    <versionNumber>2.3</versionNumber>
+	<weburl>http://www.dapperfm.co.uk</weburl>
+	<streamurl>http://groove.wavestreamer.com</streamurl>
+	<streamport>3828</streamport>
+	<streamfolder>/</streamfolder>
+	<streamtype>shoutcast</streamtype>
+	<twitterusername>dapperfm</twitterusername>
+	<toggletime>1800</toggletime><!--How many seconds to toggle players (cleans memory)-->
+	<buffertime>3000</buffertime><!--How many miliseconds to hols in buffer memory-->
+	<adserver>http://shout-on-air.probert.me.uk/adserver/dapper.xml</adserver>
+	<header>
+		<![CDATA[ 
+		<h1>Dapper <em style='color:#5E7E19;'>FM</em></h1><h2>Call us now on (01685) 814848</h2>
+		]]>
+	</header>
+</prefs>
