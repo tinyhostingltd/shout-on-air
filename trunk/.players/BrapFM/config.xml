@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <prefs>
 	<stationname>Brap.FM</stationname>
-    <versionNumber>2.3</versionNumber>
+    <versionNumber>2.4</versionNumber>
 	<weburl>http://www.brap.fm</weburl>
-	<streamurl>http://delicious.wavestreamer.com</streamurl>
+	<streamurl>http://50.117.8.242</streamurl>
 	<streamport>4626</streamport>
-	<streamfolder>/</streamfolder>
+	<streamfolder>/Live</streamfolder>
 	<streamtype>shoutcast</streamtype>
 	<twitterusername>brapradio</twitterusername>
 	<bufferflush>3600</bufferflush>
