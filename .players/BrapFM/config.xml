@@ -10,5 +10,9 @@
 	<twitterusername>brapradio</twitterusername>
 	<bufferflush>3600</bufferflush>
     <adserver>http://shout-on-air.probert.me.uk/adserver/ads.xml</adserver>
-	<header />
+	<header>
+		<![CDATA[ 
+		<h1>Brap <em style='color:#CB3A3A;'>FM</em></h1><h2>Worldwide Internet Radio</h2>
+		]]>
+	</header>
 </prefs>
