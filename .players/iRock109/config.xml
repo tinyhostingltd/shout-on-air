@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <prefs>
-	<stationname>iRock109</stationname>
-    <versionNumber>1.1</versionNumber>
+	<stationname>iROCK109</stationname>
+    <versionNumber>1.2</versionNumber>
 	<weburl>http://www.irock109.com/</weburl>
 	<streamurl>http://cp6.digistream.info</streamurl>
 	<streamport>20366</streamport>

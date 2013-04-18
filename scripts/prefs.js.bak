@@ -31,37 +31,27 @@ var prefs = {
 			return volume;
 		}
 		else { //Get
-            try {
-                volume = air.EncryptedLocalStore.getItem('volume');
-                if (volume) 
-                    return volume.readUTFBytes(volume.bytesAvailable);
-                else 
-                    return 0.8;
-            } catch(err){
-                $(this).log("Error geting volume");
-                $(this).log(err);
-            }
-			return 0.8;
+			volume = air.EncryptedLocalStore.getItem('volume');
+			if (volume) 
+				return volume.readUTFBytes(volume.bytesAvailable);
+			else 
+				return 0.8;
 		}
 	},
 	winx: function(x){
-        if(x){ //Set
-            var data = new air.ByteArray(); // Peristant save the volume to the users 
-            data.writeUTFBytes(x);
-            air.EncryptedLocalStore.setItem('x', data);
-            return x;
-        }
-        else { //Get
-            try {
-                x = air.EncryptedLocalStore.getItem('x');
-                if (x) 
-                    return x.readUTFBytes(x.bytesAvailable);
-                else 
-                    return null;
-            } catch(err){
-                alert(err);
-            }
-        }
+		if(x){ //Set
+			var data = new air.ByteArray(); // Peristant save the volume to the users 
+			data.writeUTFBytes(x);
+			air.EncryptedLocalStore.setItem('x', data);
+			return x;
+		}
+		else { //Get
+			x = air.EncryptedLocalStore.getItem('x');
+			if (x) 
+				return x.readUTFBytes(x.bytesAvailable);
+			else 
+				return null;
+		}
 	},
 	winy: function(y){
 		if(y){ //Set
@@ -71,15 +61,11 @@ var prefs = {
 			return y;
 		}
 		else { //Get
-            try{
-                y = air.EncryptedLocalStore.getItem('y');
-                if (y) 
-                    return y.readUTFBytes(y.bytesAvailable);
-                else 
-                    return null;
-            } catch(err){
-                alert(err);
-            }
+			y = air.EncryptedLocalStore.getItem('y');
+			if (y) 
+				return y.readUTFBytes(y.bytesAvailable);
+			else 
+				return null;
 		}
 	},
 	loadprefs: function(){
