@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>Desktop Radio install example page</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+		<script type="text/javascript">
+            var flashvars = {
+                airversion: "1.5",
+                appname: "iRock109 Player",
+                appurl: "http://shout-on-air.googlecode.com/files/iRock109-1.1.air",
+                appid: "com.irock109",
+                image: "iROCK109.png",
+                hidehelp: "false",
+                skiptransition: "false",
+                appversion: "1.1",
+                backgroundColor: "#FFFFFF"
+            };
+            var params = {
+              menu: "false"
+            };
+            var attributes = {
+              id: "shoutonair",
+              name: "shoutonair"
+            };
+            swfobject.embedSWF("AIRInstallBadge.swf", "shoutonair", "215", "180", "9.0.0", "expressInstall.swf", flashvars, params, attributes);
+		</script>
+	</head>
+	<body>
+		<div id="shoutonair">
+			<h1>Please upgrade your Flash Player</h1>
+			<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://wwwimages.adobe.com/www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+		</div>
+	</body>
+</html>
