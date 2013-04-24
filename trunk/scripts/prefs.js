@@ -59,7 +59,7 @@ var prefs = {
                 else 
                     return null;
             } catch(err){
-                alert(err);
+                air.trace(err);
             }
         }
 	},
@@ -78,7 +78,7 @@ var prefs = {
                 else 
                     return null;
             } catch(err){
-                alert(err);
+                air.trace(err);
             }
 		}
 	},

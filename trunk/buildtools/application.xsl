@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:a="http://ns.adobe.com/air/application/3.0">
+<xsl:variable name="lcletters">abcdefghijklmnopqrstuvwxyz</xsl:variable>
+<xsl:variable name="ucletters">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
+
 <xsl:output method="xml" indent="yes"/>
 	<xsl:template match="/prefs">
         <application xmlns="http://ns.adobe.com/air/application/3.0">
             <!-- The application identifier string, unique to this application. Required. -->
-            <id><xsl:value-of select="stationname"/>.shout-on-air</id>
+            <id>uk.me.probert.shout-on-air.<xsl:value-of select="translate(stationname,$ucletters,$lcletters)"/></id>
             <!-- Used as the filename for the application. Required. -->
             <filename><xsl:value-of select="stationname"/></filename>
             <!-- The name that is displayed in the AIR application installer. Optional. -->
